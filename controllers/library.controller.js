@@ -1,4 +1,5 @@
 import { Books } from "../models/library.model.js";
+import { librarySchema } from "../schemes/library.schema.js";
 
 export const libHome = async (req, res) => {
     try {
@@ -37,27 +38,39 @@ export const getBook = async (req, res) => {
 
 export const addBook = async (req, res) => {
     try {
-        await Books.create(req.body);
-        res.send("Book added successfully");
+        const { error, value } = librarySchema.validate(req.body);
+
+        if (error) {
+            return res.status(400).json({error: error.details[0].message});
+        }
+
+        const book = await Books.create(value);
+        return res.status(200).json({'book': book});
         
     } catch (error) {
-        res.json({message: error.message});
+        res.json({'error': error.message});
     }
 }
 
 export const updateBook = async (req, res) => {
     try {
-        const book = await Books.findByIdAndUpdate(req.params.id, req.body);
+        const { error, value } = librarySchema.validate(req.body);
+
+        if (error) {
+            return res.status(400).json({error: error.details[0].message});
+        }
+
+        const book = await Books.findByIdAndUpdate(req.params.id, value);
 
         if(!book) {
-            res.send("Update failed!\nBook not found. ");
+            res.status(400).json({'error': "Book not found"});
             return;
         }
 
-        res.send("Book updated successfully");
+        res.status(200).json({'book': value});
         
     } catch (error) {
-        res.json({message: error.message});
+        res.status(500).json({'error': error.message});
     }
 }
 
@@ -66,13 +79,13 @@ export const deleteBook = async (req, res) => {
         const book = await Books.findByIdAndDelete(req.params.id);
 
         if(!book) {
-            res.send("Deletion failed!\nBook not found. ");
+            res.status(400).json({'error': "Book not found"});
             return;
         }
 
-        res.send("Book deleted successfully");
+        res.status(200).json({'book': book});
         
     } catch (error) {
-        res.json({message: error.message});
+        res.status(500).json({'error': error.message});
     }
 }
