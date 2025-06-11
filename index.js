@@ -8,9 +8,9 @@ const app = express();
 const Port = process.env.Port || 6060;
 const MongoUri = process.env.MONGO_URI;
 
+app.use(cors());
 app.use(express.json());
 app.use(libRouter);
-app.use(cors);
 
 mongoose.connect(MongoUri)
 .then(() => {
