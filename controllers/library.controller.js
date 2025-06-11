@@ -1,15 +1,6 @@
 import { Books } from "../models/library.model.js";
 import { librarySchema } from "../schemes/library.schema.js";
 
-export const libHome = async (req, res) => {
-    try {
-        res.send("ABC-Book API");
-        
-    } catch (error) {
-        res.json({message: error.message});
-    }
-}
-
 export const getAllBooks = async (req, res) => {
     try {
         const books = await Books.find();

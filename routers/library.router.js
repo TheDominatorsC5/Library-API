@@ -3,9 +3,8 @@ import { libHome, getAllBooks, getBook, addBook, updateBook, deleteBook } from "
 
 export const libRouter = Router();
 
-libRouter.get('/', libHome);
-libRouter.get('/api/books', getAllBooks);
-libRouter.get('/api/books/:id', getBook);
-libRouter.post('/api/books', addBook);
-libRouter.put('/api/books/:id', updateBook);
-libRouter.delete('/api/books/:id', deleteBook);
+libRouter.get('/', getAllBooks);
+libRouter.get('/:id', getBook);
+libRouter.post('/', addBook);
+libRouter.put('/:id', updateBook);
+libRouter.delete('/:id', deleteBook);

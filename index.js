@@ -10,7 +10,7 @@ const MongoUri = process.env.MONGO_URI;
 
 app.use(cors());
 app.use(express.json());
-app.use(libRouter);
+app.use('/api/books', libRouter);
 
 mongoose.connect(MongoUri)
 .then(() => {
