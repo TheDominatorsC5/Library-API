@@ -13,6 +13,8 @@ const BookSchema = new Schema({
         required: true
     },
 
+    description: String,
+
     year: {
         type: String,
         required: true
