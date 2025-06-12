@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { libHome, getAllBooks, getBook, addBook, updateBook, deleteBook } from "../controllers/library.controller.js";
+import { getAllBooks, getBook, addBook, updateBook, deleteBook } from "../controllers/library.controller.js";
 
 export const libRouter = Router();
 
