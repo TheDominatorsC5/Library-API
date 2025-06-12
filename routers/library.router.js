@@ -6,5 +6,5 @@ export const libRouter = Router();
 libRouter.get('/', getAllBooks);
 libRouter.get('/:id', getBook);
 libRouter.post('/', addBook);
-libRouter.put('/:id', updateBook);
+libRouter.patch('/:id', updateBook);
 libRouter.delete('/:id', deleteBook);
