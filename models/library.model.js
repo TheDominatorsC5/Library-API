@@ -1,4 +1,3 @@
-import { required } from "joi";
 import { Schema, model } from "mongoose";
 import normalize from "normalize-mongoose";
 
@@ -14,10 +13,7 @@ const BookSchema = new Schema({
         required: true
     },
 
-    description: {
-        type: String,
-        required: false
-    },
+    description: String,
 
     year: {
         type: String,
